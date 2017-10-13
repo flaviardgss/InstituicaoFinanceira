@@ -1,9 +1,10 @@
 package br.com.flavia.financeiro;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class Conta {
+public class Conta implements Serializable {
 
     protected int ID;
     protected double saldo;
@@ -18,10 +19,10 @@ public class Conta {
     public boolean realizaSaque(double saque) {
         if (this.saldo >= saque) {
             this.saldo = (this.saldo - saque);
-            extrato.add("Saque         (-): R$" + df.format(saque) + "\n");
+            extrato.add("Saque         (-): R$" + df.format(saque));
             return true;
         } else {
-            extrato.add("SAQUE INDISPONÍVEL NO MOMENTO!\n");
+            extrato.add("SAQUE INDISPONÍVEL NO MOMENTO!");
             return false;
         }
     }
@@ -31,7 +32,7 @@ public class Conta {
             return false;
         } else {
             this.saldo = (this.saldo + deposito);
-            extrato.add("Depósito      (+): " + "R$" + df.format(deposito) + "\n");
+            extrato.add("Depósito      (+): " + "R$" + df.format(deposito));
             return true;
         }
     }
@@ -41,7 +42,7 @@ public class Conta {
             return false;
         } else {
             this.saldo = this.saldo + deposito;
-            extrato.add("Transferência (+): " + "R$" + df.format(deposito) + "\n");
+            extrato.add("Transferência (+): " + "R$" + df.format(deposito));
             return true;
         }
     }
@@ -49,7 +50,7 @@ public class Conta {
     public boolean realizaTransferencia(double saque) {
         if (this.saldo >= saque) {
             this.saldo = (this.saldo - saque);
-            extrato.add("Transferência (-): " + "R$" + df.format(saque) + "\n");
+            extrato.add("Transferência (-): " + "R$" + df.format(saque));
             return true;
         } else {
             return false;
